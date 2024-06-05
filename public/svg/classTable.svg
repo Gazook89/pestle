@@ -1,0 +1,56 @@
+<svg width="100%" height="100%" viewBox="0 0 534 429" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:1.5;">
+    <g>
+        <path id='frame-body' d="M36.146,346.771C35.92,341.037 35.846,334.631 35.846,327.489L35.846,101.368C35.846,94.225 35.92,87.819 36.146,82.086C57.625,74.86 75.631,58.892 82.652,37.178L143.384,37.178C142.955,51.044 176.608,59.614 207.372,59.614L325.928,59.614C356.692,59.614 390.345,51.044 389.916,37.178L450.648,37.178C457.669,58.892 475.675,74.86 497.154,82.086C497.38,87.819 497.454,94.225 497.454,101.368L497.454,327.489C497.454,334.631 497.38,341.037 497.154,346.771C475.675,353.996 457.669,369.964 450.648,391.679L389.916,391.679C390.345,377.812 356.692,369.242 325.928,369.242L207.372,369.242C176.608,369.242 142.955,377.812 143.384,391.679L82.652,391.679C75.631,369.964 57.625,353.996 36.146,346.771Z" style="fill:#fff;"/>
+        <g id='outer-color-frame' filter='url(#myFilter)'>
+            <path d="M35.68,127.269L13.581,105.404L13.64,87.325C51.733,85.625 87.196,57.11 85.761,15.449L447.532,15.449C446.096,57.11 481.56,85.625 519.652,87.325L519.711,105.404L497.613,127.269" style="fill:none;stroke:#deb400;stroke-width:15px;"/>
+            <path d="M497.45,102.4L497.45,328.52C497.45,379.115 493.753,392.711 458.388,392.711L389.912,392.711C390.341,378.844 356.688,370.274 325.924,370.274L207.368,370.274C176.604,370.274 142.951,378.844 143.38,392.711L74.904,392.711C39.539,392.711 35.842,379.115 35.842,328.52L35.842,102.4C35.842,51.805 39.539,38.209 74.904,38.209L143.38,38.209C142.951,52.076 176.604,60.646 207.368,60.646L325.924,60.646C356.688,60.646 390.341,52.076 389.912,38.209L458.388,38.209C493.753,38.209 497.45,51.805 497.45,102.4Z" style="fill:none;stroke:#deb400;stroke-width:15px;"/>
+            <path d="M35.68,303.651L13.581,325.516L13.64,343.595C51.733,345.295 87.196,373.81 85.761,415.471L447.532,415.471C446.096,373.81 481.56,345.295 519.652,343.595L519.711,325.516L497.613,303.651" style="fill:none;stroke:#deb400;stroke-width:15px;"/>
+            <circle cx="179.071" cy="415.471" r="4.12" style="fill:#141414;stroke:#deb400;stroke-width:15px;stroke-linecap:round;"/>
+            <circle cx="354.221" cy="415.471" r="4.12" style="fill:#141414;stroke:#deb400;stroke-width:15px;stroke-linecap:round;"/>
+            <circle cx="179.071" cy="15.449" r="4.12" style="fill:#141414;stroke:#deb400;stroke-width:15px;stroke-linecap:round;"/>
+            <circle cx="354.221" cy="15.449" r="4.12" style="fill:#141414;stroke:#deb400;stroke-width:15px;stroke-linecap:round;"/>
+        </g>
+
+        <g id='inner-color-frame'>
+            <path d="M35.683,126.237L13.585,104.372L13.644,86.293C51.736,84.593 87.2,56.078 85.765,14.417L447.536,14.417C446.1,56.078 481.564,84.593 519.656,86.293L519.715,104.372L497.617,126.237" style="fill:none;stroke:#141414;stroke-width:8px;"/>
+            <path d="M497.454,101.368L497.454,327.489C497.454,378.083 493.757,391.679 458.392,391.679L389.916,391.679C390.345,377.812 356.692,369.242 325.928,369.242L207.372,369.242C176.608,369.242 142.955,377.812 143.384,391.679L74.908,391.679C39.543,391.679 35.846,378.083 35.846,327.489L35.846,101.368C35.846,50.773 39.543,37.178 74.908,37.178L143.384,37.178C142.955,51.044 176.608,59.614 207.372,59.614L325.928,59.614C356.692,59.614 390.345,51.044 389.916,37.178L458.392,37.178C493.757,37.178 497.454,50.773 497.454,101.368Z" style="fill:none;stroke:#141414;stroke-width:8px;"/>
+            <path d="M35.683,302.619L13.585,324.484L13.644,342.563C51.736,344.263 87.2,372.778 85.765,414.439L447.536,414.439C446.1,372.778 481.564,344.263 519.656,342.563L519.715,324.484L497.617,302.619" style="fill:none;stroke:#141414;stroke-width:8px;"/>
+        </g>
+        <g id='inner-color-frame-circles'>
+            <circle cx="179.075" cy="414.439" r="6.87" style="fill:#141414;"/>
+            <circle cx="354.225" cy="414.439" r="6.87" style="fill:#141414;"/>
+            <circle cx="179.075" cy="14.417" r="6.87" style="fill:#141414;"/>
+            <circle cx="354.225" cy="14.417" r="6.87" style="fill:#141414;"/>
+        </g>
+        <g id="rows">
+            <rect x="54.335" y="268.184" width="424.515" height="29.397" style="fill:#d2dda6;"/>
+            <rect x="54.335" y="209.39" width="424.515" height="29.397" style="fill:#d2dda6;"/>
+            <rect x="54.335" y="150.596" width="424.515" height="29.397" style="fill:#d2dda6;"/>
+        </g>
+        <g id="text">
+            <text x="65.76px" y="290.735px" style="font-family:'ScalySans', 'Scaly Sans';font-size:24px;fill:#2e271e;">5 <tspan x="113.76px " y="290.735px ">D</tspan>olore fugiat exercitation</text>
+            <text x="65.707px" y="261.338px" style="font-family:'ScalySans', 'Scaly Sans';font-size:24px;fill:#2e271e;">4 <tspan x="113.707px " y="261.338px ">O</tspan>ccaecat dolor</text>
+            <text x="65.707px" y="231.941px" style="font-family:'ScalySans', 'Scaly Sans';font-size:24px;fill:#2e271e;">3 <tspan x="113.707px " y="231.941px ">R</tspan>eprehender sit et do labore.</text>
+            <text x="65.707px" y="202.544px" style="font-family:'ScalySans', 'Scaly Sans';font-size:24px;fill:#2e271e;">2 <tspan x="113.707px " y="202.544px ">D</tspan>eserunt ipsum do</text>
+            <text x="65.76px" y="173.146px" style="font-family:'ScalySans', 'Scaly Sans';font-size:24px;fill:#2e271e;">1 <tspan x="113.76px " y="173.146px ">D</tspan>erit est eu reprehenderit</text>
+            <text x="60.409px" y="115.822px" style="font-family:'ScalySansCaps', 'Scaly Sans Caps';font-size:40px;fill:#2e271e;">Class Table</text>
+        </g>
+    </g>
+    <defs>
+    <!-- BLUR -->
+        <filter id='myFilter'>
+            <!-- bevel -->
+            <feConvolveMatrix in="SourceAlpha" order="3,3" kernelMatrix="-100 -10 0 
+            -50 0 10 
+            0 20 130
+            " divisor="1.5" targetX="2" targetY="0" kernelUnitLength=".8" result="bevel"></feConvolveMatrix>
+            <!-- 4aa8a27b-5500-4bd4-a314-2daaf8709f78 -->
+            <feColorMatrix values="1 0 0 0 0,
+            0 1 0 0 0,
+            0 0 1 0 0,
+            0 0 0 .5 0" result="ConvolveRecolor" in="bevel"></feColorMatrix>
+            <!-- e0823536-00f1-4441-a0c7-2b234883113d -->
+            <feComposite operator="atop" result="CompositeResult" in="ConvolveRecolor" in2="SourceGraphic"></feComposite>
+        </filter>
+    </defs>
+</svg>

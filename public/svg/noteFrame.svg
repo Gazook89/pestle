@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 80 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <g id="body">
+        <rect id="background" x="0" y="9.933" width="80" height="40.041" style="fill:#dbdfaf;"/>
+        <g id="body-text" serif:id="body text">
+            <text x="7.908px" y="27.047px" style="font-family:'ScalySansCaps-Bold', 'Scaly Sans Caps';font-weight:700;font-size:14.667px;">Note</text>
+        </g>
+    </g>
+    <g id="frame">
+        <path id="bottom-curve" serif:id="bottom curve" d="M0,8.001L11.007,0L11.007,8.001L68.993,8.001L68.993,0L80,8.001L80,9.933L0,9.933L0,8.001Z" style="fill:#231f20;"/>
+        <path id="top-curve" serif:id="top curve" d="M0,51.905L11.007,59.907L11.007,51.905L68.993,51.905L68.993,59.907L80,51.905L80,49.974L0,49.974L0,51.905Z" style="fill:#231f20;"/>
+    </g>
+</svg>

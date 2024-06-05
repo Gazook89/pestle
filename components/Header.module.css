@@ -1,0 +1,21 @@
+@font-face {
+	font-family: 'fondamento';
+	src: url('../public/fonts/fondamento-italic-webfont.woff2') format('woff2');
+	font-weight: normal;
+	font-style: italic;
+  
+  }
+  
+  @font-face {
+	font-family: 'fondamento';
+	src: url('../public/fonts/fondamento-regular-webfont.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+  
+  }
+
+.title {
+	flex: 0 0 60px;
+	margin: 0;
+	font-family: 'fondamento'
+}

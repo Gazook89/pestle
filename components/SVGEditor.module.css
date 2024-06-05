@@ -1,0 +1,16 @@
+.editorContainer {
+	flex: 1 1 60vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+}
+
+.editor {
+	border: 1px solid rgb(229, 232, 236);
+	border-radius: 6px;
+	padding: 0px;
+	margin: 1em 0;
+	box-shadow:  0 0 25px -15px lightsteelblue;
+	height: fit-content;
+}

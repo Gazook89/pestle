@@ -1,7 +1,12 @@
 .sidebar {
 	border-left: 1px solid rgb(236, 236, 236);
-	padding-left: 3vw;
+	padding: 1em 0 0 3vw;
 	flex: 0 0 30vw;
 	min-width: 300px;
 
+}
+
+.inputField {
+	display: flex;
+	justify-content: space-between;
 }

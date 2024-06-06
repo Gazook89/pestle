@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useContext } from "react";
+import React, { useEffect, useRef, useContext, useState } from "react";
 import { SVG } from "@svgdotjs/svg.js";
 import { SvgContext } from "./SvgContext";
 import styles from "./SVGEditor.module.css";
 
 const Editor = ({ svgImage }) => {
 	const svgRef = useRef(null);
-	const { svgContent, setSvgContent } = useContext(SvgContext);
+	const [svgContent, setSvgContent] = useState(null);
+	const { config } = useContext(SvgContext);
 
 	useEffect(() => {
 		// Fetch the SVG content
@@ -13,7 +14,7 @@ const Editor = ({ svgImage }) => {
 			.then(response => response.text())
 			.then(data => setSvgContent(data))
 			.catch(error => console.error('Error loading SVG:', error));
-	}, [svgImage, setSvgContent]);
+	}, [svgImage]);
 
 	useEffect(() => {
 		if (svgContent && svgRef.current) {
@@ -22,14 +23,12 @@ const Editor = ({ svgImage }) => {
 			draw.clear();
 
 			// Load the fetched SVG content into the drawing context
-			draw.svg(svgContent);
+			const svgContentDrawn = draw.svg(svgContent);
 		}
 	}, [svgContent]);
 
 	return (
-		<div className={styles.editorContainer}>
-			<div ref={svgRef} className={styles.editor} />
-		</div>
+		<div className={styles.editor} ref={svgRef} />
 	);
 };
 

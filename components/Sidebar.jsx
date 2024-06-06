@@ -1,9 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SvgContext } from "./SvgContext";
 import styles from "./Sidebar.module.css";
+import "@melloware/coloris/dist/coloris.css";
 
 const Sidebar = () => {
 	const { config } = useContext(SvgContext);
+
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			const Coloris = require("@melloware/coloris");
+			Coloris.init();
+		}
+	}, []);
 
 	const handleInputChange = (selector, property, value) => {
 		const applyChange = (element) => {
@@ -32,9 +40,10 @@ const Sidebar = () => {
 					<div key={index}>
 						<label>{input.label}</label>
 						<input
-							type="color"
+							type="text"
 							defaultValue={input.defaultValue}
 							onInput={(e) => handleInputChange(input.selector, input.property, e.target.value)}
+							data-coloris
 						/>
 					</div>
 				);
@@ -61,7 +70,7 @@ const Sidebar = () => {
 	};
 
 	return (
-		<div className={styles.sidebar} >
+		<div className={styles.sidebar}>
 			{config?.inputs.map((input, index) => renderInput(input, index))}
 		</div>
 	);

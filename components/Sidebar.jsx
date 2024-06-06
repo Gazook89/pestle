@@ -2,8 +2,6 @@ import React, { useContext } from "react";
 import { SvgContext } from "./SvgContext";
 import styles from "./Sidebar.module.css";
 
-import { SketchPicker } from 'react-color';
-
 const Sidebar = () => {
 	const { config } = useContext(SvgContext);
 
@@ -33,12 +31,11 @@ const Sidebar = () => {
 				return (
 					<div key={index}>
 						<label>{input.label}</label>
-						<SketchPicker color={input.defaultValue} onChange={handleInputChange(input.selector, input.property, e.target.value)} />
-						{/* <input
+						<input
 							type="color"
 							defaultValue={input.defaultValue}
 							onInput={(e) => handleInputChange(input.selector, input.property, e.target.value)}
-						/> */}
+						/>
 					</div>
 				);
 			case 'range':

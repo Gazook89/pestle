@@ -1,15 +1,17 @@
 .editorContainer {
-	flex: 1 1 60vw;
+	flex: 2 1 60vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
+	border: 1px solid rgb(229, 232, 236);
+	border-radius: 14px;
+	box-shadow:  0 0 25px -15px lightsteelblue;
 }
 
 .editor {
-	border: 1px solid rgb(229, 232, 236);
-	border-radius: 14px;
 	padding: 0px;
-	box-shadow:  0 0 25px -15px lightsteelblue;
 	height: fit-content;
+	border-radius: 6px;
+	background-color: white;
+	
 }

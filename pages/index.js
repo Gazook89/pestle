@@ -32,16 +32,20 @@ const HomeContent = () => {
 			</Head>
 
 			<main>
-				<Header title="Pestle" />
 
-				<select onChange={handleSvgSelect}>
-					<option value='classTable'>Class Table</option>
-					<option value='noteFrame'>Note</option>
-				</select>
+
+				
 
 				<div className="layout">
 					<Editor svgImage={svgImage} />
-					<Sidebar />
+					<Sidebar>
+						<Header title="Pestle">
+							<select onChange={handleSvgSelect}>
+								<option value='classTable'>Class Table</option>
+								<option value='noteFrame'>Note</option>
+							</select>
+						</Header>
+					</Sidebar>
 				</div>
 			</main>
 

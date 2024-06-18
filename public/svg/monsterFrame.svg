@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 800 330" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    
+	<defs>
+
+		<!-- Filter to blend top_bar with the monsterFrameBars.jpg -->
+		<filter id="barsBlendFilter" >
+            <feFlood flood-color="#ffd226" flood-opacity="1" result="barColor" />
+			<feImage href="raster/monsterFrameBars.jpg"  x="0" width="100%"  result="barTexture" />
+			<feBlend in="barTexture" in2="barColor" mode="multiply" />
+		</filter>
+
+		<filter id="bodyBlendFilter" >
+            <feFlood flood-color="#fff3c7" flood-opacity="1" result="bodyColor" />
+			<feImage href="raster/parchmentBackgroundGrayscale.jpg"  x="0" width="100%"  result="parchmentTexture" />
+			<feBlend in="bodyColor" in2="parchmentTexture" mode="screen" />
+		</filter>
+
+        <clipPath id="body-clip">
+            <path   d="M7.284,14.222L790.098,14.222L791.54,20.236L792.463,27.306L793.476,29.163L790.61,32.117L792.556,49.803L791.806,83.72L792.532,94.852L792.599,116.984L792.063,117.86L790.229,118.429L790.501,119.373L792.195,121.403L789.884,123.533L791.668,124.654L790.008,135.2L792.67,140.608L791.711,158.931L791.777,160.4L791.742,177.613L791.485,190.537L792.684,215.94L791.44,216.435L790.472,217.566L793.163,220.153L792.319,222.622L793.14,225.895L793.395,233.328L792.028,232.743L793.135,234.926L792.881,236.002L792.67,244.301L791.357,258.339L791.341,276.256L792.13,289.367L791.538,305.146L794,315.778L6,315.778L7.708,310.228L8.793,288.575L9.631,282.406L10.864,280.163L8.895,281.078L8.013,281.007L9.436,276.051L7.883,261.112L8.831,246.058L9.016,223.876L7.437,194.255L10.257,147.254L12.509,144.049L9.526,137.807L10.97,135.688L8.137,133.893L9.635,112.009L8.492,73.054L9.854,72.248L7.538,54.73L11.061,39.846L8.288,17.536L7.223,15.386L7.284,14.222Z" />
+        </clipPath>
+	</defs>
+    
+
+	<g id="monster_frame">
+        <path id="body" clip-path="url(#body-clip)" style="filter:url(#bodyBlendFilter)" d="M7.284,14.222L790.098,14.222L791.54,20.236L792.463,27.306L793.476,29.163L790.61,32.117L792.556,49.803L791.806,83.72L792.532,94.852L792.599,116.984L792.063,117.86L790.229,118.429L790.501,119.373L792.195,121.403L789.884,123.533L791.668,124.654L790.008,135.2L792.67,140.608L791.711,158.931L791.777,160.4L791.742,177.613L791.485,190.537L792.684,215.94L791.44,216.435L790.472,217.566L793.163,220.153L792.319,222.622L793.14,225.895L793.395,233.328L792.028,232.743L793.135,234.926L792.881,236.002L792.67,244.301L791.357,258.339L791.341,276.256L792.13,289.367L791.538,305.146L794,315.778L6,315.778L7.708,310.228L8.793,288.575L9.631,282.406L10.864,280.163L8.895,281.078L8.013,281.007L9.436,276.051L7.883,261.112L8.831,246.058L9.016,223.876L7.437,194.255L10.257,147.254L12.509,144.049L9.526,137.807L10.97,135.688L8.137,133.893L9.635,112.009L8.492,73.054L9.854,72.248L7.538,54.73L11.061,39.846L8.288,17.536L7.223,15.386L7.284,14.222Z" />
+
+		<g id="bars">
+			<rect id="top_bar" x="0" y="0" width="800" height="13" style="filter:url(#barsBlendFilter);" />
+            <rect id="bottom_bar" x="0" y="315.778" width="800" height="13" style="filter:url(#barsBlendFilter)" />
+		</g>
+	</g>
+</svg>
+

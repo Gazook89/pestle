@@ -8,14 +8,20 @@ import { useState, useContext } from 'react';
 
 import classTableConfig from '../config/classTable.js';
 import noteFrameConfig from '../config/noteFrame.js';
+import classTableDecorationConfig from '../config/classTableDecoration.js';
+import phbFooterConfig from '../config/phbFooter.js';
+import monsterFrameConfig from '../config/monsterFrame.js';
 
 const svgConfigs = {
+	monsterFrame: monsterFrameConfig,
 	classTable: classTableConfig,
 	noteFrame: noteFrameConfig,
+	classTableDecoration: classTableDecorationConfig,
+	phbFooter: phbFooterConfig,
 };
 
 const HomeContent = () => {
-	const [svgImage, setSvgImage] = useState('classTable');
+	const [svgImage, setSvgImage] = useState('monsterFrame');
 	const { setConfig } = useContext(SvgContext);
 
 	const handleSvgSelect = (evt) => {
@@ -41,8 +47,11 @@ const HomeContent = () => {
 					<Sidebar>
 						<Header title="Pestle">
 							<select onChange={handleSvgSelect}>
+								<option value='monsterFrame'>Monster</option>
 								<option value='classTable'>Class Table</option>
 								<option value='noteFrame'>Note</option>
+								<option value='classTableDecoration'>Class Decoration</option>
+								<option value='phbFooter'>Footer</option>
 							</select>
 						</Header>
 					</Sidebar>
@@ -56,7 +65,7 @@ const HomeContent = () => {
 
 export default function Home() {
 	return (
-		<SvgProvider initialConfig={svgConfigs['classTable']}>
+		<SvgProvider initialConfig={svgConfigs['monsterFrame']}>
 			<HomeContent />
 		</SvgProvider>
 	);

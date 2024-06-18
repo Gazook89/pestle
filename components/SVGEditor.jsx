@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { SVG } from "@svgdotjs/svg.js";
+import { SVG, extend as SVGextend, Element as SVGElement } from "@svgdotjs/svg.js";
 import { SvgContext } from "./SvgContext";
 import styles from "./SVGEditor.module.css";
 
@@ -18,11 +18,13 @@ const Editor = ({ svgImage }) => {
 	useEffect(() => {
 		if (svgContent && svgRef.current) {
 			// Clear the existing content
-			const draw = SVG(svgRef.current);
+			const draw = SVG(svgRef.current)
 			draw.clear();
 
 			// Load the fetched SVG content into the drawing context
-			const svgContentDrawn = draw.svg(svgContent);
+			const editorItem = draw.svg(svgContent);
+			console.log(editorItem.node)
+			editorItem.node.style.width = null;
 		}
 	}, [svgContent]);
 

@@ -9,9 +9,12 @@
 }
 
 .editor {
-	padding: 0px;
+	padding: 30px;
 	height: fit-content;
 	border-radius: 6px;
 	background-color: white;
+	& svg {
+		width: 100%
+	}
 	
 }

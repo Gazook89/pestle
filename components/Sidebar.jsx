@@ -48,7 +48,7 @@ const Sidebar = ({ children }) => {
 		const svgElement = svgRef.current.querySelector("svg");
 
 		// Hide elements as required
-		config.hiddenElements.forEach((el) => {
+		config.hiddenElements?.forEach((el) => {
 			SVG(svgElement).find(el).hide();
 		});
 
@@ -89,7 +89,7 @@ const Sidebar = ({ children }) => {
 		};
 
 		// Show elements to reset
-		config.hiddenElements.forEach((el) => {
+		config.hiddenElements?.forEach((el) => {
 			SVG(svgElement).find(el).show();
 		});
 

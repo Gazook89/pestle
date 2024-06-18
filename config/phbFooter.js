@@ -11,9 +11,19 @@ const config = {
 		{
 			"label" : "Tab Color",
 			"type" : "color",
-			"selector" : ["#decoration"],
-			"property" : "stroke",
-			"defaultValue" : "#c8c5a0"
+			"selector" : ["#color_tab"],
+			"property" : "fill",
+			"defaultValue" : "#004711"
+		},
+		{
+			"label" : "Preview Size",
+			"type" : "range",
+			"selector" : ["svg"],
+			"property": "width",
+			"min": 300,
+			"max": 900,
+			"step": 10,
+			"defaultValue": 300
 		}
 	]
 }

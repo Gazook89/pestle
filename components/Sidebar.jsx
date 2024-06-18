@@ -1,11 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SVG } from "@svgdotjs/svg.js";
 import { SvgContext } from "./SvgContext";
 import styles from "./Sidebar.module.css";
 import "@melloware/coloris/dist/coloris.css";
+import * as htmlToImage from 'html-to-image';
 
 const Sidebar = ({ children }) => {
 	const { config, svgRef } = useContext(SvgContext);
+	const [pngObjects, setPngObjects] = useState([]);
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -70,30 +72,34 @@ const Sidebar = ({ children }) => {
 
 		canvas.width = width;
 		canvas.height = height;
-
 		const img = new Image();
-		const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-		const url = URL.createObjectURL(svgBlob);
+		// const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+		// const url = URL.createObjectURL(svgBlob);
 
-		img.onload = () => {
-			// Ensure the SVG content fits the canvas
-			context.clearRect(0, 0, canvas.width, canvas.height);
-			context.drawImage(img, 0, 0, canvas.width, canvas.height);
-			URL.revokeObjectURL(url);
+		// img.onload = () => {
+		// 	// Ensure the SVG content fits the canvas
+		// 	context.clearRect(0, 0, canvas.width, canvas.height);
+		// 	context.drawImage(img, 0, 0, canvas.width, canvas.height);
+		// 	URL.revokeObjectURL(url);
 
+
+
+		htmlToImage.toCanvas(svgElement).then((canvas)=>{
 			// Display the PNG on the page
 			const pngUrl = canvas.toDataURL("image/png");
 			const imgElement = document.createElement("img");
 			imgElement.src = pngUrl;
 			document.getElementById("png-preview").prepend(imgElement);
-		};
+		})
+
+
 
 		// Show elements to reset
 		config.hiddenElements?.forEach((el) => {
 			SVG(svgElement).find(el).show();
 		});
 
-		img.src = url;
+		// img.src = url;
 	};
 
 	const renderInput = (input, index) => {
@@ -142,7 +148,12 @@ const Sidebar = ({ children }) => {
 				<button className={styles.primary} onClick={generatePNG}>Generate PNG</button>
 				<button onClick={() => document.getElementById("png-preview").innerHTML = ''}>Clear Previews</button>
 			</div>
+			<p>Generated PNGs - save to image host (i.e. Imgur or ImgBB)</p>
 			<div id="png-preview" className={styles.previews} />
+			<p>Paste into Homebrewery Style Editor</p>
+			<div id="css-output" className={styles.css}>
+
+			</div>
 		</div>
 	);
 };

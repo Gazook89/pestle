@@ -13,60 +13,70 @@ import phbFooterConfig from '../config/phbFooter.js';
 import monsterFrameConfig from '../config/monsterFrame.js';
 
 const svgConfigs = {
-	monsterFrame: monsterFrameConfig,
-	classTable: classTableConfig,
-	noteFrame: noteFrameConfig,
-	classTableDecoration: classTableDecorationConfig,
-	phbFooter: phbFooterConfig,
+    monsterFrame: monsterFrameConfig,
+    classTable: classTableConfig,
+    noteFrame: noteFrameConfig,
+    classTableDecoration: classTableDecorationConfig,
+    phbFooter: phbFooterConfig,
 };
 
 const HomeContent = () => {
-	const [svgImage, setSvgImage] = useState('monsterFrame');
-	const { setConfig } = useContext(SvgContext);
+    const [svgImage, setSvgImage] = useState('monsterFrame');
+    const { setConfig } = useContext(SvgContext);
+    const [selectedSvg, setSelectedSvg] = useState('monsterFrame');
+    const [svgThumbnails, setSvgThumbnails] = useState([]);
 
-	const handleSvgSelect = (evt) => {
-		const selectedSvg = evt.target.value;
-		setSvgImage(selectedSvg);
-		setConfig(svgConfigs[selectedSvg]);
-	};
+    const handleSvgChange = (evt) => {
+        setSelectedSvg(evt.target.value);
+    };
 
-	return (
-		<div className="container">
-			<Head>
-				<title>Pestle</title>
-				<link rel="icon" href="/favicon.ico" />
-			</Head>
+    const handleSvgSelect = (evt) => {
+        evt.preventDefault();
+        setSvgImage(selectedSvg);
+        setConfig(svgConfigs[selectedSvg]);
+        addSvgThumbnail(svgConfigs[selectedSvg].svg); // Add the selected SVG to thumbnails
+    };
 
-			<main>
+    const addSvgThumbnail = (svgContent) => {
+        setSvgThumbnails((prevThumbnails) => [...prevThumbnails, svgContent]);
+    };
 
+    return (
+        <div className="container">
+            <Head>
+                <title>Pestle</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
 
-				
+            <main>
+                <div className="layout">
+                    <Editor svgImage={svgImage} />
+                    <Sidebar svgThumbnails={svgThumbnails}>
+                        <Header title="Pestle">
+                            <form onSubmit={handleSvgSelect}>
+                                <select value={selectedSvg} onChange={handleSvgChange}>
+                                    <option value='monsterFrame'>Monster</option>
+                                    <option value='classTable'>Class Table</option>
+                                    <option value='noteFrame'>Note</option>
+                                    <option value='classTableDecoration'>Class Decoration</option>
+                                    <option value='phbFooter'>Footer</option>
+                                </select>
+                                <button type="submit">Create</button>
+                            </form>
+                        </Header>
+                    </Sidebar>
+                </div>
+            </main>
 
-				<div className="layout">
-					<Editor svgImage={svgImage} />
-					<Sidebar>
-						<Header title="Pestle">
-							<select onChange={handleSvgSelect}>
-								<option value='monsterFrame'>Monster</option>
-								<option value='classTable'>Class Table</option>
-								<option value='noteFrame'>Note</option>
-								<option value='classTableDecoration'>Class Decoration</option>
-								<option value='phbFooter'>Footer</option>
-							</select>
-						</Header>
-					</Sidebar>
-				</div>
-			</main>
-
-			<Footer />
-		</div>
-	);
+            <Footer />
+        </div>
+    );
 };
 
 export default function Home() {
-	return (
-		<SvgProvider initialConfig={svgConfigs['monsterFrame']}>
-			<HomeContent />
-		</SvgProvider>
-	);
+    return (
+        <SvgProvider initialConfig={svgConfigs['monsterFrame']}>
+            <HomeContent />
+        </SvgProvider>
+    );
 }

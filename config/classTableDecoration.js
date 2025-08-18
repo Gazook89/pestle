@@ -1,12 +1,12 @@
 const config = {
-	"hiddenElements": [],
-	"inputs" : [
+	hiddenElements : [],
+	inputs : [
 		{
-			"label" : "Line Color",
-			"type" : "color",
-			"selector" : ["#decoration"],
-			"property" : "stroke",
-			"defaultValue" : "#c8c5a0"
+			label : 'Line Color',
+			type : 'color',
+			selector : ['#decoration'],
+			property : 'stroke',
+			defaultValue : '#c8c5a0'
 		}
 	]
 }

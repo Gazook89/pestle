@@ -5,157 +5,205 @@ import styles from "./Sidebar.module.css";
 import "@melloware/coloris/dist/coloris.css";
 import * as htmlToImage from 'html-to-image';
 
-const Sidebar = ({ children }) => {
-	const { config, svgRef } = useContext(SvgContext);
-	const [pngObjects, setPngObjects] = useState([]);
+const Sidebar = ({ children, svgThumbnails }) => {
+    const { config, svgRef } = useContext(SvgContext);
+    const [inputValues, setInputValues] = useState({});
 
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			const Coloris = require("@melloware/coloris");
-			Coloris.init();
-			Coloris({ margin: 5, selectInput: true, closeButton: true, closeLabel: 'close', theme: 'large' });
-		}
-	}, []);
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const Coloris = require("@melloware/coloris");
+            Coloris.init();
+            Coloris({ margin: 5, selectInput: true, closeButton: true, closeLabel: 'close', theme: 'large' });
+        }
+    }, []);
 
-	// Update color inputs when the config changes
-	useEffect(() => {
-		const inputs = document.querySelectorAll("[data-coloris]");
-		inputs.forEach((input) => {
-			input.value = input.defaultValue;
-			input.dispatchEvent(new Event('input', { bubbles: true })); // Trigger input event
-		});
-	}, [config]);
+    // Update color inputs when the config changes
+    useEffect(() => {
+        const inputs = document.querySelectorAll("[data-coloris]");
+        inputs.forEach((input) => {
+            input.value = input.defaultValue;
+            input.dispatchEvent(new Event('input', { bubbles: true })); // Trigger input event
+        });
+    }, [config]);
 
-	const handleInputChange = (selector, property, value) => {
-		const applyChange = (element) => {
-			if (element) {
-				element.style[property] = value;
-			}
-		};
+    const handleInputChange = (selector, property, value) => {
+        setInputValues(prevValues => ({ ...prevValues, [property]: value }));
 
-		if (Array.isArray(selector)) {
-			selector.forEach(sel => {
-				if (!sel || sel.trim() === '') return;
-				const elements = document.querySelectorAll(sel);
-				elements?.forEach(applyChange);
-			});
-		} else {
-			if (!selector || selector.trim() === '') return;
-			const elements = document.querySelectorAll(selector);
-			elements?.forEach(applyChange);
-		}
-	};
+        const applyChange = (element) => {
+            if (element) {
+                element.style[property] = value;
+            }
+        };
 
-	const generatePNG = () => {
-		const svgElement = svgRef.current.querySelector("svg");
+        if (Array.isArray(selector)) {
+            selector.forEach(sel => {
+                if (!sel || sel.trim() === '') return;
+                const elements = document.querySelectorAll(sel);
+                elements?.forEach(applyChange);
+            });
+        } else {
+            if (!selector || selector.trim() === '') return;
+            const elements = document.querySelectorAll(selector);
+            elements?.forEach(applyChange);
+        }
 
-		// Hide elements as required
-		config.hiddenElements?.forEach((el) => {
-			SVG(svgElement).find(el).hide();
-		});
+        // Update the SVG in the Editor and the corresponding thumbnail
+        updateSvgInEditorAndThumbnails(selector, property, value);
+    };
 
-		const svgString = new XMLSerializer().serializeToString(svgElement);
-		const canvas = document.createElement("canvas");
-		const context = canvas.getContext("2d");
+    const updateSvgInEditorAndThumbnails = (selector, property, value) => {
+        const svgEditor = svgRef.current.querySelector("svg");
+        const thumbnails = document.querySelectorAll(".svg-thumbnail");
+		if(selector === undefined || property === undefined || value === undefined || !svgEditor) return;
 
-		// Get the viewBox dimensions
-		const viewBox = svgElement.viewBox.baseVal;
-		let width, height;
-		if (viewBox) {
-			width = viewBox.width;
-			height = viewBox.height;
-		} else {
-			const svgRect = svgElement.getBoundingClientRect();
-			width = svgRect.width;
-			height = svgRect.height;
-		}
+        const applyChange = (element) => {
+            if (element) {
+                element.style[property] = value;
+            }
+        };
 
-		canvas.width = width;
-		canvas.height = height;
-		const img = new Image();
-		// const svgBlob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
-		// const url = URL.createObjectURL(svgBlob);
+        // Apply changes to the SVG in the Editor
+        if (Array.isArray(selector)) {
+            selector.forEach(sel => {
+                if (!sel || sel.trim() === '') return;
+                const elements = svgEditor.querySelectorAll(sel);
+                elements?.forEach(applyChange);
+            });
+        } else {
+            if (selector.trim() === '') return;
+            const elements = svgEditor.querySelectorAll(selector);
+            elements?.forEach(applyChange);
+        }
 
-		// img.onload = () => {
-		// 	// Ensure the SVG content fits the canvas
-		// 	context.clearRect(0, 0, canvas.width, canvas.height);
-		// 	context.drawImage(img, 0, 0, canvas.width, canvas.height);
-		// 	URL.revokeObjectURL(url);
+        // Apply changes to the corresponding thumbnail
+        thumbnails.forEach(thumbnail => {
+            if (Array.isArray(selector)) {
+                selector.forEach(sel => {
+                    if (!sel || sel.trim() === '') return;
+                    const elements = thumbnail.querySelectorAll(sel);
+                    elements?.forEach(applyChange);
+                });
+            } else {
+                if (!selector || selector.trim() === '') return;
+                const elements = thumbnail.querySelectorAll(selector);
+                elements?.forEach(applyChange);
+            }
+        });
+    };
 
+    const generatePNG = () => {
+        const svgElement = svgRef.current.querySelector("svg");
 
+        htmlToImage.toPng(svgElement).then((dataUrl) => {
+            // Display the PNG in a modal
+            const imgElement = document.createElement("img");
+            imgElement.src = dataUrl;
+            const modal = document.createElement("div");
+            modal.style.position = 'fixed';
+            modal.style.top = '50%';
+            modal.style.left = '50%';
+            modal.style.transform = 'translate(-50%, -50%)';
+            modal.style.backgroundColor = 'white';
+            modal.style.padding = '20px';
+            modal.style.zIndex = 1000;
+            modal.appendChild(imgElement);
 
-		htmlToImage.toCanvas(svgElement).then((canvas)=>{
-			// Display the PNG on the page
-			const pngUrl = canvas.toDataURL("image/png");
-			const imgElement = document.createElement("img");
-			imgElement.src = pngUrl;
-			document.getElementById("png-preview").prepend(imgElement);
-		})
+            const closeButton = document.createElement("button");
+            closeButton.textContent = "Close";
+            closeButton.onclick = () => {
+                document.body.removeChild(modal);
+            };
+            modal.appendChild(closeButton);
 
+            document.body.appendChild(modal);
+        });
+    };
 
+    const renderInput = (input, index) => {
+        switch (input.type) {
+            case 'color':
+                return (
+                    <div key={index} className={styles.inputField}>
+                        <label>{input.label}</label>
+                        <input
+                            type="text"
+                            defaultValue={input.defaultValue}
+                            onInput={(e) => handleInputChange(input.selector, input.property, e.target.value)}
+                            data-coloris
+                            data-property={input.property}
+                        />
+                    </div>
+                );
+            case 'range':
+                return (
+                    <div key={index} className={styles.inputField}>
+                        <label>{input.label}</label>
+                        <input
+                            type="range"
+                            min={input.min}
+                            max={input.max}
+                            step={input.step}
+                            defaultValue={input.defaultValue}
+                            list={input.label}
+                            onInput={(e) => handleInputChange(input.selector, input.property, `${e.target.value}px`)}
+                            data-property={input.property}
+                        />
+                        <datalist id={input.label}>
+                            <option value={input.defaultValue}></option>
+                        </datalist>
+                    </div>
+                );
+            default: return null;
+        }
+    };
 
-		// Show elements to reset
-		config.hiddenElements?.forEach((el) => {
-			SVG(svgElement).find(el).show();
-		});
+    return (
+        <div className={styles.sidebar}>
+            {children}
+            <div className={styles.controls}>
+                {config?.inputs.map((input, index) => renderInput(input, index))}
+            </div>
+            <div className={styles.buttons}>
+                <button className={styles.primary} onClick={generatePNG}>Generate PNG</button>
+                <button onClick={() => {
+                    document.getElementById("png-preview").innerHTML = '';
+                }}>Clear Previews</button>
+            </div>
+            <p>Generated SVGs - click to edit</p>
+            <div id="png-preview" className={styles.previews}>
+                {svgThumbnails.map((svgContent, index) => (
+                    <div
+                        key={index}
+                        className="svg-thumbnail"
+                        dangerouslySetInnerHTML={{ __html: svgContent }}
+                        onClick={() => {
+                            const parser = new DOMParser();
+                            const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
+                            const svgElement = svgDoc.querySelector("svg");
+                            const cssContent = config.inputs.filter((el) => el.css).map((el) => {
+                                return `${el.property}: ${svgElement.style[el.property] || el.defaultValue};`;
+                            }).join("\n");
 
-		// img.src = url;
-	};
+                            document.getElementById("css-output").textContent = cssContent;
 
-	const renderInput = (input, index) => {
-		switch (input.type) {
-			case 'color':
-				return (
-					<div key={index} className={styles.inputField}>
-						<label>{input.label}</label>
-						<input
-							type="text"
-							defaultValue={input.defaultValue}
-							onInput={(e) => handleInputChange(input.selector, input.property, e.target.value)}
-							data-coloris
-						/>
-					</div>
-				);
-			case 'range':
-				return (
-					<div key={index} className={styles.inputField}>
-						<label>{input.label}</label>
-						<input
-							type="range"
-							min={input.min}
-							max={input.max}
-							step={input.step}
-							defaultValue={input.defaultValue}
-							list={input.label}
-							onInput={(e) => handleInputChange(input.selector, input.property, `${e.target.value}px`)}
-						/>
-						<datalist id={input.label}>
-							<option value={input.defaultValue}></option>
-						</datalist>
-					</div>
-				);
-			default: return null;
-		}
-	};
+                            // Set input values to match the clicked SVG's properties
+                            Object.keys(inputValues).forEach(key => {
+                                const value = svgElement.style[key];
+                                const inputElement = document.querySelector(`input[data-property="${key}"]`);
+                                if (inputElement) {
+                                    inputElement.value = value;
+                                    inputElement.dispatchEvent(new Event('input', { bubbles: true }));
+                                }
+                            });
 
-	return (
-		<div className={styles.sidebar}>
-			{children}
-			<div className={styles.controls}>
-				{config?.inputs.map((input, index) => renderInput(input, index))}
-			</div>
-			<div className={styles.buttons}>
-				<button className={styles.primary} onClick={generatePNG}>Generate PNG</button>
-				<button onClick={() => document.getElementById("png-preview").innerHTML = ''}>Clear Previews</button>
-			</div>
-			<p>Generated PNGs - save to image host (i.e. Imgur or ImgBB)</p>
-			<div id="png-preview" className={styles.previews} />
-			<p>Paste into Homebrewery Style Editor</p>
-			<div id="css-output" className={styles.css}>
-
-			</div>
-		</div>
-	);
+                            // Update the Editor SVG
+                            svgRef.current.innerHTML = svgContent;
+                        }}
+                    />
+                ))}
+            </div>
+        </div>
+    );
 };
 
 export default Sidebar;

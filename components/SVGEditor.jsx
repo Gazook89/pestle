@@ -23,7 +23,6 @@ const Editor = ({ svgImage }) => {
 
 			// Load the fetched SVG content into the drawing context
 			const editorItem = draw.svg(svgContent);
-			console.log(editorItem.node)
 			editorItem.node.style.width = null;
 		}
 	}, [svgContent]);

@@ -5,6 +5,7 @@ const config = {
 			label : 'Outer Stroke Color',
 			type : 'color',
 			selector : '#outer-color-frame > *',
+			outputSelector : null,
 			property : 'stroke',
 			defaultValue : '#f2ce4a',
 		},
@@ -12,6 +13,7 @@ const config = {
 			label : 'Inner Stroke Color',
 			type : 'color',
 			selector : ['#inner-color-frame > *', '#inner-color-frame-circles > *'],
+			outputSelector : null,
 			property : 'stroke',
 			defaultValue : '#141414'
 		},
@@ -19,6 +21,7 @@ const config = {
 			label : 'Outer Stroke Width',
 			type : 'range',
 			selector : '#outer-color-frame > *',
+			outputSelector : null,
 			property : 'stroke-width',
 			min : 0,
 			max : 20,
@@ -29,6 +32,7 @@ const config = {
 			label : 'Inner Stroke Width',
 			type : 'range',
 			selector : '#inner-color-frame > *',
+			outputSelector : null,
 			property : 'stroke-width',
 			min : 0,
 			max : 20,
@@ -40,6 +44,8 @@ const config = {
 			type : 'color',
 			selector : '#frame-body',
 			property : 'fill',
+			outputSelector : '.classTable.frame',
+			outputProperty : 'background-color',
 			defaultValue : '#FFF'
 		},
 		{
@@ -47,6 +53,8 @@ const config = {
 			type : 'color',
 			selector : 'text',
 			property : 'fill',
+			outputSelector : '.classTable',
+			outputProperty : 'color',
 			defaultValue : '#000'
 		},
 		{
@@ -54,6 +62,8 @@ const config = {
 			type : 'color',
 			selector : '#rows > *',
 			property : 'fill',
+			outputSelector : '.classTable tbody tr(:nth-child(odd))',
+			outputProperty : 'background-color',
 			defaultValue : '#D4F7A1'
 		}
 	]

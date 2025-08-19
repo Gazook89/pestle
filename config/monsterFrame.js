@@ -5,14 +5,16 @@ const config = {
 			type : 'color',
 			selector : ['#barsBlendFilter > feFlood'],
 			property : 'flood-color',
-			defaultValue : '#ffd226'
+			defaultValue : '#ffd226',
+			includeInCSS : false
 		},
 		{
 			label : 'Body Color',
 			type : 'color',
 			selector : ['#bodyBlendFilter > feFlood'],
 			property : 'flood-color',
-			defaultValue : '#fff3c7'
+			defaultValue : '#fff3c7',
+			includeInCSS : false
 		}
 	]
 }

@@ -1,11 +1,15 @@
 import React, { useEffect, useContext, useState } from "react";
 import { SVG, extend as SVGextend, Element as SVGElement } from "@svgdotjs/svg.js";
 import { SvgContext } from "./SvgContext";
-import styles from "./SVGEditor.module.css";
+import styles from "./Preview.module.css";
 
-const Editor = ({ svgImage }) => {
+import PreviewToolbar from "./PreviewToolbar";
+
+const Preview = ({ svgImage }) => {
 	const { config, svgRef } = useContext(SvgContext);
 	const [svgContent, setSvgContent] = useState(null);
+	const [canvasColor, setCanvasColor] = useState('');
+	const [view, setView] = useState('preview');
 
 	useEffect(() => {
 		// Fetch the SVG content
@@ -27,12 +31,25 @@ const Editor = ({ svgImage }) => {
 		}
 	}, [svgContent]);
 
+	const compileCSS = ()=>{
+		let css = '';
+		config.inputs.forEach((input)=>{
+			if(input.selector && input.property && input.defaultValue) {
+				css += `${input.selector[0]} {\n  ${input.property}: ${input.defaultValue};\n}\n\n`;
+			}
+		})
+		return css
+	};
+
+
 	return (
-		<div className={styles.editorContainer}>
-			<div className={styles.editor} ref={svgRef} />
+		<div className={styles.preview} style={{ backgroundColor: canvasColor }}>
+			<PreviewToolbar svg={svgRef.current} onCanvasColorChange={setCanvasColor} onViewChange={setView} />
+			<div className={styles.svgCanvas} ref={svgRef} />
+			<div className={styles.cssView} style={{display: view === 'preview' ? 'none' : ''}}><textarea value={compileCSS()} /></div>
 			
 		</div>
 	);
 };
 
-export default Editor;
+export default Preview;

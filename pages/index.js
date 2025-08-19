@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Header from '@components/Header';
 import Footer from '@components/Footer';
-import Editor from '@components/SVGEditor';
+import Preview from '@components/Preview.jsx';
 import Sidebar from '@components/Sidebar';
 import { SvgProvider, SvgContext } from '@components/SvgContext';
 import { useState, useContext } from 'react';
@@ -50,7 +50,7 @@ const HomeContent = () => {
 
             <main>
                 <div className="layout">
-                    <Editor svgImage={svgImage} />
+                    <Preview svgImage={svgImage} />
                     <Sidebar svgThumbnails={svgThumbnails}>
                         <Header title="Pestle">
                             <form onSubmit={handleSvgSelect}>

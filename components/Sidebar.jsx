@@ -6,7 +6,7 @@ import "@melloware/coloris/dist/coloris.css";
 import * as htmlToImage from 'html-to-image';
 
 const Sidebar = ({ children, svgThumbnails }) => {
-    const { config, svgRef } = useContext(SvgContext);
+    const { config, svgRef, svgAppearance } = useContext(SvgContext);
     const [inputValues, setInputValues] = useState({});
 
     useEffect(() => {
@@ -52,9 +52,9 @@ const Sidebar = ({ children, svgThumbnails }) => {
     };
 
     const updateSvgInEditorAndThumbnails = (selector, property, value) => {
-        const svgEditor = svgRef.current.querySelector("svg");
+        const preview = svgRef.current.querySelector("svg");
         const thumbnails = document.querySelectorAll(".svg-thumbnail");
-		if(selector === undefined || property === undefined || value === undefined || !svgEditor) return;
+		if(selector === undefined || property === undefined || value === undefined || !preview) return;
 
         const applyChange = (element) => {
             if (element) {
@@ -66,12 +66,12 @@ const Sidebar = ({ children, svgThumbnails }) => {
         if (Array.isArray(selector)) {
             selector.forEach(sel => {
                 if (!sel || sel.trim() === '') return;
-                const elements = svgEditor.querySelectorAll(sel);
+                const elements = preview.querySelectorAll(sel);
                 elements?.forEach(applyChange);
             });
         } else {
             if (selector.trim() === '') return;
-            const elements = svgEditor.querySelectorAll(selector);
+            const elements = preview.querySelectorAll(selector);
             elements?.forEach(applyChange);
         }
 

@@ -5,6 +5,7 @@ const SvgContext = createContext();
 const SvgProvider = ({ children, initialConfig }) => {
 	const [config, setConfig] = useState(initialConfig);
 	const svgRef = useRef(null);
+	
 
 	useEffect(() => {
 		setConfig(initialConfig);

@@ -99,6 +99,11 @@ const Sidebar = ({ children, svgThumbnails }) => {
 
     const generatePNG = () => {
         const svgElement = svgRef.current.querySelector("svg");
+		config.hiddenElements?.forEach((selector)=>{
+			svgElement.querySelectorAll(selector).forEach((el) => {
+				el.style.visibility = 'hidden'; // Toggle hidden class for elements to be excluded
+			})
+		})
 
         htmlToImage.toPng(svgElement).then((dataUrl) => {
             // Display the PNG in a modal
@@ -122,6 +127,12 @@ const Sidebar = ({ children, svgThumbnails }) => {
             modal.appendChild(closeButton);
 
             document.body.appendChild(modal);
+
+			config.hiddenElements?.forEach((selector)=>{
+				svgElement.querySelectorAll(selector).forEach((el) => {
+					el.style.visibility = 'visible'; // Revert visibility change
+				})
+			})
         });
     };
 
@@ -130,7 +141,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
             case 'color':
                 return (
                     <div key={index} className={styles.inputField}>
-                        <label>{input.label}</label>
+                        <label>{input.label}{input.outputSelector ? '*' : ''}</label>
                         <input
                             type="text"
                             value={input.value}
@@ -186,7 +197,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
                             const parser = new DOMParser();
                             const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
                             const svgElement = svgDoc.querySelector("svg");
-                            const cssContent = config.inputs.filter((el) => el.css).map((el) => {
+                            const cssContent = config.inputs.filter((el) => el.outputSelector).map((el) => {
                                 return `${el.property}: ${svgElement.style[el.property] || el.value};`;
                             }).join("\n");
 

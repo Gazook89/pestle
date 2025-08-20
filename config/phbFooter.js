@@ -15,12 +15,7 @@ const config = {
 			property : 'fill',
 			value : '#004711',
 		},
-	],
-	renderCSS: (selector, declarations)=>{
-		return (`${selector} {
-	${declarations}
-}`)
-	}
+	]
 }
 
 export default config

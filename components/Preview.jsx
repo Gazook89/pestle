@@ -31,13 +31,8 @@ const Preview = ({ svgImage }) => {
 		}
 	}, [svgContent]);
 
-	const compileCSS = (inputValues)=>{
+	const compileCSS = ()=>{
 		let css = '';
-		// cssOutput.inputs.forEach((input)=>{
-		// 	if(input.selector && input.property && input.value) {
-		// 		css += `${input.selector[0]} {\n  ${input.property}: ${input.value};\n}\n\n`;
-		// 	}
-		// })
 		config.inputs.map((input)=>{
 			if(!input.outputSelector || !input.outputProperty) return;
 			css += `${input.outputSelector} {\n  ${input.outputProperty}: ${input.value};\n}\n\n`;
@@ -59,7 +54,7 @@ const Preview = ({ svgImage }) => {
 	return (
 		<div className={styles.preview} style={{ backgroundColor: canvasColor }}>
 			<PreviewToolbar svg={svgRef.current} onCanvasColorChange={setCanvasColor} onViewChange={setView} />
-			<div className={styles.svgCanvas} ref={svgRef} />
+			<div className='svgCanvas' ref={svgRef} />
 			<div className={styles.cssView} style={{display: view === 'preview' ? 'none' : ''}}>
 				<div>
 					{compileCSS()}

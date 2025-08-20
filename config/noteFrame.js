@@ -1,5 +1,4 @@
 const config = {
-	hbSelectorRoot : '.page .note',
 	hiddenElements : ['#body'],
 	inputs : [
 		{

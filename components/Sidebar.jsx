@@ -17,20 +17,20 @@ const Sidebar = ({ children, svgThumbnails }) => {
         }
     }, []);
 
-    // Update color inputs when the config changes
-    useEffect(() => {
-        const inputs = document.querySelectorAll("[data-coloris]");
-        inputs.forEach((input) => {
-            input.value = input.value;
-            input.dispatchEvent(new Event('input', { bubbles: true })); // Trigger input event
-        });
-    }, []);
+    // // Update color inputs when the config changes
+    // useEffect(() => {
+    //     const inputs = document.querySelectorAll("[data-coloris]");
+    //     inputs.forEach((input) => {
+    //         input.value = input.value;
+    //         input.dispatchEvent(new Event('input', { bubbles: true })); // Trigger input event
+    //     });
+    // }, []);
 
     const handleInputChange = (selector, property, value) => {
         setConfig(prevConfig => ({
             ...prevConfig,
             inputs: prevConfig.inputs.map(input => 
-                input.selector === selector ? { ...input, value: value } : input
+                (input.selector === selector) && (input.property === property) ? { ...input, value: value } : input
             )
         }));
 
@@ -162,7 +162,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
                             step={input.step}
                             value={input.value}
                             list={input.label}
-                            onInput={(e) => handleInputChange(input.selector, input.property, `${e.target.value}px`)}
+                            onInput={(e) => handleInputChange(input.selector, input.property, `${e.target.value}`)}
                             data-property={input.property}
                         />
                         <datalist id={input.label}>

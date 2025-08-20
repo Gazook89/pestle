@@ -21,9 +21,9 @@ const svgConfigs = {
 };
 
 const HomeContent = () => {
-    const [svgImage, setSvgImage] = useState('monsterFrame');
+    const [svgImage, setSvgImage] = useState('classTable');
     const { setConfig } = useContext(SvgContext);
-    const [selectedSvg, setSelectedSvg] = useState('monsterFrame');
+    const [selectedSvg, setSelectedSvg] = useState('classTable');
     const [svgThumbnails, setSvgThumbnails] = useState([]);
 
     const handleSvgChange = (evt) => {
@@ -75,7 +75,7 @@ const HomeContent = () => {
 
 export default function Home() {
     return (
-        <SvgProvider initialConfig={svgConfigs['monsterFrame']}>
+        <SvgProvider initialConfig={svgConfigs['classTable']}>
             <HomeContent />
         </SvgProvider>
     );

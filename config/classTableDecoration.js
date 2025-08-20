@@ -6,7 +6,7 @@ const config = {
 			type : 'color',
 			selector : ['#decoration'],
 			property : 'stroke',
-			defaultValue : '#c8c5a0'
+			value : '#c8c5a0'
 		}
 	]
 }

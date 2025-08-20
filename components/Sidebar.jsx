@@ -6,7 +6,7 @@ import "@melloware/coloris/dist/coloris.css";
 import * as htmlToImage from 'html-to-image';
 
 const Sidebar = ({ children, svgThumbnails }) => {
-    const { config, svgRef, svgAppearance } = useContext(SvgContext);
+    const { config, setConfig, svgRef, cssOutput, setCssOutput } = useContext(SvgContext);
     const [inputValues, setInputValues] = useState({});
 
     useEffect(() => {
@@ -21,13 +21,18 @@ const Sidebar = ({ children, svgThumbnails }) => {
     useEffect(() => {
         const inputs = document.querySelectorAll("[data-coloris]");
         inputs.forEach((input) => {
-            input.value = input.defaultValue;
+            input.value = input.value;
             input.dispatchEvent(new Event('input', { bubbles: true })); // Trigger input event
         });
-    }, [config]);
+    }, []);
 
     const handleInputChange = (selector, property, value) => {
-        setInputValues(prevValues => ({ ...prevValues, [property]: value }));
+        setConfig(prevConfig => ({
+            ...prevConfig,
+            inputs: prevConfig.inputs.map(input => 
+                input.selector === selector ? { ...input, value: value } : input
+            )
+        }));
 
         const applyChange = (element) => {
             if (element) {
@@ -49,6 +54,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
 
         // Update the SVG in the Editor and the corresponding thumbnail
         updateSvgInEditorAndThumbnails(selector, property, value);
+
     };
 
     const updateSvgInEditorAndThumbnails = (selector, property, value) => {
@@ -127,7 +133,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
                         <label>{input.label}</label>
                         <input
                             type="text"
-                            defaultValue={input.defaultValue}
+                            value={input.value}
                             onInput={(e) => handleInputChange(input.selector, input.property, e.target.value)}
                             data-coloris
                             data-property={input.property}
@@ -143,13 +149,13 @@ const Sidebar = ({ children, svgThumbnails }) => {
                             min={input.min}
                             max={input.max}
                             step={input.step}
-                            defaultValue={input.defaultValue}
+                            value={input.value}
                             list={input.label}
                             onInput={(e) => handleInputChange(input.selector, input.property, `${e.target.value}px`)}
                             data-property={input.property}
                         />
                         <datalist id={input.label}>
-                            <option value={input.defaultValue}></option>
+                            <option value={input.value}></option>
                         </datalist>
                     </div>
                 );
@@ -181,13 +187,13 @@ const Sidebar = ({ children, svgThumbnails }) => {
                             const svgDoc = parser.parseFromString(svgContent, 'image/svg+xml');
                             const svgElement = svgDoc.querySelector("svg");
                             const cssContent = config.inputs.filter((el) => el.css).map((el) => {
-                                return `${el.property}: ${svgElement.style[el.property] || el.defaultValue};`;
+                                return `${el.property}: ${svgElement.style[el.property] || el.value};`;
                             }).join("\n");
 
                             document.getElementById("css-output").textContent = cssContent;
 
                             // Set input values to match the clicked SVG's properties
-                            Object.keys(inputValues).forEach(key => {
+                            Object.keys(config.inputs).forEach(key => {
                                 const value = svgElement.style[key];
                                 const inputElement = document.querySelector(`input[data-property="${key}"]`);
                                 if (inputElement) {

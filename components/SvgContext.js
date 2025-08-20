@@ -4,6 +4,7 @@ const SvgContext = createContext();
 
 const SvgProvider = ({ children, initialConfig }) => {
 	const [config, setConfig] = useState(initialConfig);
+	const [cssOutput, setCssOutput] = useState({});
 	const svgRef = useRef(null);
 	
 
@@ -12,7 +13,7 @@ const SvgProvider = ({ children, initialConfig }) => {
 	}, [initialConfig]);
 
 	return (
-		<SvgContext.Provider value={{ config, setConfig, svgRef }}>
+		<SvgContext.Provider value={{ config, setConfig, svgRef, cssOutput, setCssOutput }}>
 			{children}
 		</SvgContext.Provider>
 	);

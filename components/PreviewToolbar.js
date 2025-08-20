@@ -24,7 +24,7 @@ const PreviewToolbar = ({ onCanvasColorChange, onViewChange }) => {
 				<label>CSS<input type='radio' id='css' name='view' /></label>
 			</fieldset>
 			<label>Zoom:<input type='range' min='100' max='1000' onInput={(evt) => resizeSVG(evt)} /></label>
-			<label>Preview Background
+			<label>Preview Background: 
 				<input
                             type="text"
                             onInput={(e)=>{onCanvasColorChange(e.target.value)}}

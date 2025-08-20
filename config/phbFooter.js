@@ -6,28 +6,15 @@ const config = {
 			type : 'color',
 			selector : ['#lines'],
 			property : 'stroke',
-			defaultValue : '#c8c5a0',
-			css : false
+			value : '#c8c5a0'
 		},
 		{
 			label : 'Tab Color',
 			type : 'color',
 			selector : ['#color_tab'],
 			property : 'fill',
-			defaultValue : '#004711',
-			css : true
+			value : '#004711',
 		},
-		{
-			label : 'Preview Size',
-			type : 'range',
-			selector : ['svg'],
-			property : 'width',
-			min : 300,
-			max : 900,
-			step : 10,
-			defaultValue : 300,
-			css : false
-		}
 	],
 	renderCSS: (selector, declarations)=>{
 		return (`${selector} {

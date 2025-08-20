@@ -6,9 +6,9 @@ import styles from "./Preview.module.css";
 import PreviewToolbar from "./PreviewToolbar";
 
 const Preview = ({ svgImage }) => {
-	const { config, svgRef } = useContext(SvgContext);
+	const { config, svgRef, cssOutput } = useContext(SvgContext);
 	const [svgContent, setSvgContent] = useState(null);
-	const [canvasColor, setCanvasColor] = useState('');
+	const [canvasColor, setCanvasColor] = useState('transparent');
 	const [view, setView] = useState('preview');
 
 	useEffect(() => {
@@ -31,22 +31,42 @@ const Preview = ({ svgImage }) => {
 		}
 	}, [svgContent]);
 
-	const compileCSS = ()=>{
+	const compileCSS = (inputValues)=>{
 		let css = '';
-		config.inputs.forEach((input)=>{
-			if(input.selector && input.property && input.defaultValue) {
-				css += `${input.selector[0]} {\n  ${input.property}: ${input.defaultValue};\n}\n\n`;
-			}
+		// cssOutput.inputs.forEach((input)=>{
+		// 	if(input.selector && input.property && input.value) {
+		// 		css += `${input.selector[0]} {\n  ${input.property}: ${input.value};\n}\n\n`;
+		// 	}
+		// })
+		config.inputs.map((input)=>{
+			if(!input.outputSelector || !input.outputProperty) return;
+			css += `${input.outputSelector} {\n  ${input.outputProperty}: ${input.value};\n}\n\n`;
 		})
 		return css
 	};
 
+	const copyToClipboard = (text) => {
+		navigator.clipboard.writeText(text)
+			.then(() => {
+				alert('CSS copied to clipboard!');
+			})
+			.catch(err => {
+				console.error('Failed to copy text: ', err);
+				alert('Failed to copy CSS. Please try again.');
+			});
+	};
 
 	return (
 		<div className={styles.preview} style={{ backgroundColor: canvasColor }}>
 			<PreviewToolbar svg={svgRef.current} onCanvasColorChange={setCanvasColor} onViewChange={setView} />
 			<div className={styles.svgCanvas} ref={svgRef} />
-			<div className={styles.cssView} style={{display: view === 'preview' ? 'none' : ''}}><textarea value={compileCSS()} /></div>
+			<div className={styles.cssView} style={{display: view === 'preview' ? 'none' : ''}}>
+				<div>
+					{compileCSS()}
+					<button onClick={() => { copyToClipboard(compileCSS()) }}>Copy CSS</button>
+				</div>
+				
+			</div>
 			
 		</div>
 	);

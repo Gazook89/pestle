@@ -4,6 +4,7 @@ import { SvgContext } from "./SvgContext";
 import styles from "./Sidebar.module.css";
 import "@melloware/coloris/dist/coloris.css";
 import * as htmlToImage from 'html-to-image';
+import { add } from "lodash";
 
 const Sidebar = ({ children, svgThumbnails }) => {
     const { config, setConfig, svgRef, cssOutput, setCssOutput } = useContext(SvgContext);
@@ -26,7 +27,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
     //     });
     // }, []);
 
-    const handleInputChange = (selector, property, value) => {
+    const handleInputChange = (selector, property, value, additionalSelector) => {
         setConfig(prevConfig => ({
             ...prevConfig,
             inputs: prevConfig.inputs.map(input => 
@@ -51,6 +52,10 @@ const Sidebar = ({ children, svgThumbnails }) => {
             const elements = document.querySelectorAll(selector);
             elements?.forEach(applyChange);
         }
+
+		if(additionalSelector && typeof additionalSelector === 'function') {
+			additionalSelector(value);
+		}
 
         // Update the SVG in the Editor and the corresponding thumbnail
         updateSvgInEditorAndThumbnails(selector, property, value);
@@ -145,7 +150,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
                         <input
                             type="text"
                             value={input.value}
-                            onInput={(e) => handleInputChange(input.selector, input.property, e.target.value)}
+                            onInput={(e) => handleInputChange(input.selector, input.property, e.target.value, input.additionalSelector)}
                             data-coloris
                             data-property={input.property}
                         />
@@ -162,7 +167,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
                             step={input.step}
                             value={input.value}
                             list={input.label}
-                            onInput={(e) => handleInputChange(input.selector, input.property, `${e.target.value}`)}
+                            onInput={(e) => handleInputChange(input.selector, input.property, `${e.target.value}`, input.additionalSelector)}
                             data-property={input.property}
                         />
                         <datalist id={input.label}>

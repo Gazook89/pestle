@@ -37,7 +37,14 @@ const config = {
 			min : 0,
 			max : 20,
 			step : 0.2,
-			value : 8
+			value : 8,
+			additionalSelector : (value)=>{
+				const svgElement = document.querySelector('svg');
+				const innerCircles = svgElement.querySelectorAll('#inner-color-frame-circles > *');
+				innerCircles.forEach((el) => {
+					el.setAttribute('r', value * 0.85875);
+				})
+			}
 		},
 		{
 			label : 'Inside Color',

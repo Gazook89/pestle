@@ -27,7 +27,7 @@ const PreviewToolbar = ({ onCanvasColorChange, onViewChange }) => {
 	return (
 		<div className={styles.previewToolbar} >
 			<label>Zoom:<input type='range' min='10' max='300' onInput={(evt) => resizeSVG(evt)} /></label>
-			<label>Preview Background: 
+			<label>Background: 
 				<input
                             type="text"
                             onInput={(e)=>{onCanvasColorChange(e.target.value)}}

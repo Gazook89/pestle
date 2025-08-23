@@ -2,7 +2,7 @@
 	border: 1px solid rgb(236, 236, 236);
 	border-radius: 14px;
 	padding: 1em;
-	flex: 1 0 20vw;
+	flex: 1 0 300px;
 	height: min-content;
 	max-height: 100%;;
 	box-shadow:  0 0 25px -15px lightsteelblue;
@@ -54,12 +54,12 @@
 			height: 3em;
 			padding: 1em;
 			text-transform: uppercase;
-			font-weight: bold;
 			cursor: pointer;
-			border: 1px solid #517885;
-			color: #517885;
+			border: 1px solid #6e82b9;
+			accent-color: #6e82b9;
+			color: #6e82b9;
 			&.primary {
-				background: #517885;
+				background: #6e82b9;
 				color: #EEE;
 
 			}

@@ -7,23 +7,26 @@ import { on } from '@svgdotjs/svg.js';
 const PreviewToolbar = ({ onCanvasColorChange, onViewChange }) => {
 	const {config, svgRef} = React.useContext(SvgContext);
 
+	useEffect(() => {
+			if (typeof window !== "undefined") {
+				const Coloris = require("@melloware/coloris");
+				Coloris.init();
+				Coloris({ margin: 5, selectInput: true, closeButton: true, closeLabel: 'close', theme: 'large' });
+			}
+		}, []);
 	
 
 	const resizeSVG = (evt) => {
 		if (!svgRef.current) return;
 		const newSize = evt.target.value;
-		svgRef.current.style.width = `${newSize}px`;
+		svgRef.current.querySelector('svg').style.transform = `scale(${newSize / 100})`;
 	};
 
 
 
 	return (
 		<div className={styles.previewToolbar} >
-			<fieldset onChange={(evt)=>onViewChange(evt.target.id)}>
-				<label>Preview<input type='radio' id='preview' name='view' defaultChecked/></label>
-				<label>CSS<input type='radio' id='css' name='view' /></label>
-			</fieldset>
-			<label>Zoom:<input type='range' min='100' max='1000' onInput={(evt) => resizeSVG(evt)} /></label>
+			<label>Zoom:<input type='range' min='10' max='300' onInput={(evt) => resizeSVG(evt)} /></label>
 			<label>Preview Background: 
 				<input
                             type="text"

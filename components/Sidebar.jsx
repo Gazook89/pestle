@@ -3,7 +3,6 @@ import { SVG } from "@svgdotjs/svg.js";
 import { SvgContext } from "./SvgContext";
 import styles from "./Sidebar.module.css";
 import "@melloware/coloris/dist/coloris.css";
-import * as htmlToImage from 'html-to-image';
 import { add } from "lodash";
 
 const Sidebar = ({ children, svgThumbnails }) => {
@@ -102,44 +101,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
         });
     };
 
-    const generatePNG = () => {
-        const svgElement = svgRef.current.querySelector("svg");
-		config.hiddenElements?.forEach((selector)=>{
-			svgElement.querySelectorAll(selector).forEach((el) => {
-				el.style.visibility = 'hidden'; // Toggle hidden class for elements to be excluded
-			})
-		})
-
-        htmlToImage.toPng(svgElement).then((dataUrl) => {
-            // Display the PNG in a modal
-            const imgElement = document.createElement("img");
-            imgElement.src = dataUrl;
-            const modal = document.createElement("div");
-            modal.style.position = 'fixed';
-            modal.style.top = '50%';
-            modal.style.left = '50%';
-            modal.style.transform = 'translate(-50%, -50%)';
-            modal.style.backgroundColor = 'white';
-            modal.style.padding = '20px';
-            modal.style.zIndex = 1000;
-            modal.appendChild(imgElement);
-
-            const closeButton = document.createElement("button");
-            closeButton.textContent = "Close";
-            closeButton.onclick = () => {
-                document.body.removeChild(modal);
-            };
-            modal.appendChild(closeButton);
-
-            document.body.appendChild(modal);
-
-			config.hiddenElements?.forEach((selector)=>{
-				svgElement.querySelectorAll(selector).forEach((el) => {
-					el.style.visibility = 'visible'; // Revert visibility change
-				})
-			})
-        });
-    };
+    
 
     const renderInput = (input, index) => {
         switch (input.type) {
@@ -185,8 +147,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
             <div className={styles.controls}>
                 {config?.inputs.map((input, index) => renderInput(input, index))}
             </div>
-            <div className={styles.buttons}>
-                <button className={styles.primary} onClick={generatePNG}>Generate PNG</button>
+            {/* <div className={styles.buttons}>
                 <button onClick={() => {
                     document.getElementById("png-preview").innerHTML = '';
                 }}>Clear Previews</button>
@@ -223,7 +184,7 @@ const Sidebar = ({ children, svgThumbnails }) => {
                         }}
                     />
                 ))}
-            </div>
+            </div> */}
         </div>
     );
 };

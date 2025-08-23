@@ -113,11 +113,11 @@ const Workspace = ({ svgImage }) => {
 					<li>Use the controls in the sidebar to adjust properties like colors, sizes, and more. The preview will update in real-time.</li>
 					<li>Switch between "Preview", "CSS", and "PNG" tabs using the buttons at the top of the workspace.</li>
 					<li>In the "CSS" tab, you can view and copy the generated CSS for your customizations.</li>
-					<li>In the "PNG" tab, click "Generate PNG" to create a PNG image of your customized SVG. The image will appear below, and you can click on it to re-edit.</li>
+					<li>In the "PNG" tab, click "Generate PNG" to create a PNG image of your customized SVG.</li>
 				</ol>
 				<h3>Tips:</h3>
 				<ul>
-					<li>Click on any generated PNG preview to load it back into the editor for further adjustments.</li>
+					{/* <li>Click on any generated PNG preview to load it back into the editor for further adjustments.</li> */}
 					<li>Use the zoom slider in the preview toolbar to get a closer look at your design.</li>
 					<li>Change the preview background color using the color picker in the preview toolbar for better visibility of your design.</li>
 				</ul>

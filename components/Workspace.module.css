@@ -88,6 +88,7 @@
 	justify-content: center;
 	align-items: center;
 	font-family: 'Courier New', Courier, monospace;
+	overflow: scroll;
 
 	& div {
 		white-space: pre;
@@ -109,5 +110,29 @@
 				background-color: #e0e0e0;
 			}
 		}
+	}
+}
+
+.helpView {
+	width: 90%;
+	height: 90%;
+	padding: 20px;
+	overflow: auto;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	color: #333;
+	background-color: #f7f7f7;
+	border-radius: 10px;
+	box-sizing: border-box;
+
+	& h2, & h3 {
+		color: #6e82b9;
+	}
+
+	& ul, & ol {
+		padding-left: 15px;
+	}
+
+	& li {
+		margin-bottom: 10px;
 	}
 }

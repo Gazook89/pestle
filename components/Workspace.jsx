@@ -106,14 +106,14 @@ const Workspace = ({ svgImage }) => {
 			</div>
 			<div id='help' className={styles.helpView} role='tabpanel' style={{display: view === 'help' ? null : 'none'}}>
 				<h2>Help & Instructions</h2>
-				<p>Welcome to Pestle! This tool allows you to customize SVG templates and export them as PNG images along with the corresponding CSS.</p>
+				<p>Welcome to Pestle! This tool allows you to customize SVG templates and export them as PNG images along with the corresponding CSS for use in <a href="https://homebrewery.naturalcrit.com" rel="noreferrer noopener" target="_blank">the Homebrewery.</a></p>
 				<h3>How to Use:</h3>
 				<ol>
 					<li>Select an SVG template from the dropdown in the sidebar and click "Create".</li>
 					<li>Use the controls in the sidebar to adjust properties like colors, sizes, and more. The preview will update in real-time.</li>
 					<li>Switch between "Preview", "CSS", and "PNG" tabs using the buttons at the top of the workspace.</li>
-					<li>In the "CSS" tab, you can view and copy the generated CSS for your customizations.</li>
-					<li>In the "PNG" tab, click "Generate PNG" to create a PNG image of your customized SVG.</li>
+					<li>In the "CSS" tab, you can view and copy the generated CSS for your customizations.  Only the properties needed for use in the Homebrewery Style Editor will be available (noted with asterisks)-- others are baked into the PNG image.</li>
+					<li>In the "PNG" tab, click "Generate PNG" to create a PNG image of your customized SVG. Upload this image file to an image hosting service like Imgur.com or ImgBB.com.  Then use the image URL provided by those services in your brew document.</li>
 				</ol>
 				<h3>Tips:</h3>
 				<ul>

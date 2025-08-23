@@ -8,6 +8,7 @@
 	overflow: hidden;
 	display: grid;
 	place-items: center;
+	min-height: 600px;
 	& .tabs {
 		position: absolute;
 		top: 15px;
